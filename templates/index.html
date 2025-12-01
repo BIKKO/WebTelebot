@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>TG bot Creator</title>
+    <link rel="icon" href="{{url_for('static', filename='img/ico.ico')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Боковая панель -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <h2>Меню</h2>
+        </div>
+        <ul class="sidebar-menu">
+            <li class="menu-item">
+                <button class="menu-button active" data-section="home">
+                    🏠 Главная
+                </button>
+            </li>
+            <li class="menu-item">
+                <button class="menu-button" data-section="services">
+                    🛠️ Контент
+                </button>
+            </li>
+            <li class="menu-item">
+                <button class="menu-button" data-section="settings">
+                    ⚙️ Настройки
+                </button>
+            </li>
+            <li class="menu-item">
+                <button class="menu-button" data-section="about">
+                    ℹ️ О нас
+                </button>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Область контента -->
+    <main class="content-area">
+        <!-- Секции остаются без изменений -->
+        <section id="home" class="content-section active">
+            <div class="section-header">
+                <h1>Сведенья о состоянии бота</h1>
+            </div>
+            <div class="section-content">
+                <p id="status_p" name="status">{{ bot_status }}</p>
+                <input style="padding: 5px 10px; background: var(--accent-color); 
+                                        color: white; border: none; border-radius: 3px; 
+                                        cursor: pointer; font-size: 12px;" 
+                                        id="status_bt" type="button" value="{{ bot_status_bt }}" 
+                                        onclick="bot_status_bt()">
+                <input style="padding: 5px 10px; background: var(--accent-color); 
+                                        color: white; border: none; border-radius: 3px; 
+                                        cursor: pointer; font-size: 12px;" 
+                                        id="restart_bt" type="button" value="Restart" 
+                                        onclick="bot_restart_bt()">
+            </div>
+        </section>
+
+        <section id="about" class="content-section">
+            <div class="section-header">
+                <h1>О редакторе</h1>
+            </div>
+            <div class="section-content">
+                Это онлайн редактрок для Телеграмм бота.
+            </div>
+        </section>
+
+        <section id="services" class="content-section">
+            <div class="section-header">
+                <h1>Настрока содержания</h1>
+                <div class="section-content">
+                    
+                    <div class="keyboard-builder-container">
+                        <h2>Конструктор клавиатуры Telegram</h2>
+                        
+                        <div class="controls">
+                            <button onclick="addRow()">+ Добавить ряд</button>
+                            <button onclick="generateCode()">Применить</button>
+                            <button onclick="clearAll()" class="clear-btn">Очистить</button>
+                        </div>
+                        
+                        <div class="workspace">
+                            <div class="palette" id="palette">
+                                <h4>Кнопки:</h4>
+                                <div id="buttonsContainer">
+                                    <div class="button" draggable="true" data-from-palette="true">Да</div>
+                                    <div class="button" draggable="true" data-from-palette="true">Нет</div>
+                                    <div class="button" draggable="true" data-from-palette="true">Помощь</div>
+                                    <div class="button" draggable="true" data-from-palette="true">Отмена</div>
+                                    <div class="button" draggable="true" data-from-palette="true">Назад</div>
+                                </div>
+                                
+                                <div class="new-button-form">
+                                    <input type="text" id="newButtonText" placeholder="Новая кнопка">
+                                    <button onclick="addNewButton()" class="small-btn">Добавить кнопку</button>
+                                </div>
+                            </div>
+                            
+                            <div class="keyboard-area" id="keyboardArea">
+                                {{ keybord_but|safe }}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="container">
+                        <h2>Конструктор функцый бота</h2>
+                        <!-- Контейнер для блоков -->
+                        <div id="blocksContainer" class="blocks-container">
+                        </div>
+                        
+                        <!-- Форма добавления нового блока -->
+                        <div class="add-block-form">
+                            <input type="text" id="blockTitle" placeholder="Введите название страницы. Если нужна команда, добавте в начале /" class="title-input">
+                            <button onclick="addNewBlock()" class="add-btn">Добавить страницу</button>
+                        </div>
+                        <br>
+                        <input type="button" class="add-btn" value="Сохранить" onclick="save_page_or_comand()">
+                    </div>
+                    
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Настройки -->
+        <section id="settings" class="content-section">
+            <div class="section-header">
+                <h1>Настройки</h1>
+            </div>
+            <div class="section-content">
+                <form>
+                    <div style="margin-bottom: 20px;">
+                        <label for="token-input">Токен авторизации:</label>
+                        <input type="password" id="token-input" 
+                            placeholder="Введите ваш токен..." 
+                            style="padding: 8px 12px; margin: 10px 0; width: 100%; max-width: 300px; 
+                                    background: var(--bg-secondary); color: var(--text-primary); 
+                                    border: 1px solid var(--border-color); border-radius: 4px;">
+                        <div style="display: flex; gap: 10px; margin-top: 5px;">
+                            <button type="button" id="show-token" 
+                                    style="padding: 5px 10px; background: var(--accent-color); 
+                                        color: white; border: none; border-radius: 3px; 
+                                        cursor: pointer; font-size: 12px;">
+                                👁️ Показать
+                            </button>
+                            <button type="button" id="save-token" 
+                                    style="padding: 5px 10px; background: #27ae60; 
+                                        color: white; border: none; border-radius: 3px; 
+                                        cursor: pointer; font-size: 12px;">
+                                💾 Сохранить
+                            </button>
+                            <button type="button" id="clear-token" 
+                                    style="padding: 5px 10px; background: #e74c3c; 
+                                        color: white; border: none; border-radius: 3px; 
+                                        cursor: pointer; font-size: 12px;">
+                                🗑️ Очистить
+                            </button>
+                        </div>
+                        <div id="token-status" style="margin-top: 5px; font-size: 12px; color: var(--text-secondary);"></div>
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label for="theme-select">Тема оформления:</label>
+                        <select id="theme-select" style="padding: 8px 12px; margin: 10px 0; width: 200px;">
+                            <option value="light">🌞 Светлая</option>
+                            <option value="dark">🌙 Темная</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label for="lang-select">Язык интерфейса:</label>
+                        <select id="lang-select" style="padding: 8px 12px; margin: 10px 0; width: 200px;">
+                            <option value="ru">🇷🇺 Русский</option>
+                            <option value="en">🇺🇸 English</option>
+                            <option value="es">🇪🇸 Español</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-top: 30px; padding: 15px; background: var(--bg-secondary); border-radius: 5px;">
+                        <h3 style="margin-bottom: 10px;">Информация о настройках</h3>
+                        <p style="margin: 5px 0;">• 🔐 Токен - для доступа к API сервиса</p>
+                        <p style="margin: 5px 0;">• 🌞 Светлая тема - для дневного использования</p>
+                        <p style="margin: 5px 0;">• 🌙 Темная тема - для ночного использования</p>
+                        <p style="margin: 5px 0; font-size: 0.9em; color: var(--text-secondary);">
+                            Все настройки сохраняются автоматически
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+<script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
+</body>
+</html>

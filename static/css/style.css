@@ -1,0 +1,1157 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Стили боковой панели */
+.sidebar {
+    width: 250px;
+    background: #2c3e50;
+    color: white;
+    padding: 20px 0;
+    flex-shrink: 0;
+
+    position: sticky;
+    top: 0px; /* Отступ от верха */
+    align-self: stretch;
+    max-height: calc(100vh - 0px); /* Ограничиваем высоту */
+}
+
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid #34495e;
+    margin-bottom: 10px;
+}
+
+.sidebar-header h2 {
+    font-size: 1.2em;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.menu-item {
+    margin: 5px 0;
+}
+
+.menu-button {
+    width: 100%;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.menu-button:hover {
+    background: #34495e;
+}
+
+.menu-button.active {
+    background: #3498db;
+    border-right: 3px solid #2980b9;
+}
+
+/* Стили основной области контента */
+.content-area {
+    flex-grow: 1;
+    padding: 20px;
+    background: #ecf0f1;
+}
+
+.content-section {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-header {
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+.section-content {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/* Стили для светлой темы */
+.light-theme {
+    --bg-primary: #ecf0f1;
+    --bg-secondary: white;
+    --text-primary: #2c3e50;
+    --text-secondary: #34495e;
+    --accent-color: #3498db;
+    --border-color: #bdc3c7;
+    --sidebar-bg: #2c3e50;
+}
+
+/* Стили для темной темы */
+.dark-theme {
+    --bg-primary: #243243;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --accent-color: #2980b9;
+    --border-color: #444444;
+    --sidebar-bg: #0e253d; /* Темный фон для меню */
+}
+
+/* Применение CSS переменных */
+body.light-theme {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+body.dark-theme {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Боковая панель */
+.sidebar {
+    width: 250px;
+    color: white;
+    padding: 20px 0;
+    flex-shrink: 0;
+}
+
+.sidebar.light-theme {
+    background: var(--sidebar-bg);
+}
+
+.sidebar.dark-theme {
+    background: var(--sidebar-bg); /* Применяем темный фон для меню */
+}
+
+.sidebar-header {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 10px;
+}
+
+.sidebar-header h2 {
+    font-size: 1.2em;
+}
+
+.sidebar-menu {
+    list-style: none;
+}
+
+.menu-item {
+    margin: 5px 0;
+}
+
+.menu-button {
+    width: 100%;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.menu-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.menu-button.active {
+    background: var(--accent-color);
+    border-right: 3px solid var(--accent-color);
+}
+
+/* Специфичные стили для темной темы */
+.sidebar.dark-theme .menu-button:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar.dark-theme .menu-button.active {
+    background: var(--accent-color);
+    border-right: 3px solid #1f618d;
+}
+
+.sidebar.dark-theme .sidebar-header {
+    border-bottom: 1px solid #34495e;
+}
+
+/* Контент */
+.content-area {
+    flex-grow: 1;
+    padding: 20px;
+}
+
+body.light-theme .content-area {
+    background: var(--bg-primary);
+}
+
+body.dark-theme .content-area {
+    background: var(--bg-primary);
+}
+
+.content-section {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.content-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.section-header {
+    margin-bottom: 20px;
+    color: var(--text-primary);
+}
+
+.section-content.light-theme {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.section-content.dark-theme {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+/* Элементы форм в настройках */
+.section-content select {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 8px 12px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.section-content label {
+    color: var(--text-primary);
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Дополнительные стили для темной темы */
+.dark-theme .section-header h1 {
+    color: var(--text-primary);
+}
+
+.dark-theme .section-content ul li {
+    color: var(--text-primary);
+}
+
+.dark-theme .section-content strong {
+    color: var(--text-primary);
+}
+
+/* Стили для сетки проектов в портфолио */
+.section-content div[style*="grid-template-columns"] > div {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+        height: auto;
+    }
+}
+
+/*контейнеры*/
+.container {
+    /*max-width: 900px;*/
+    
+    padding: 20px;
+}
+
+.blocks-container {
+    margin-bottom: 20px;
+}
+
+.block-item {
+    background: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.block-header {
+    padding: 15px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.block-title {
+    font-weight: bold;
+    color: #333;
+}
+
+.block-controls {
+    display: flex;
+    gap: 10px;
+}
+
+.delete-btn {
+    background: #ff4757;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.delete-btn:hover {
+    background: #ff3742;
+}
+
+.block-content {
+    padding: 15px;
+    background: white;
+    display: none;
+}
+
+.block-content.expanded {
+    display: block;
+}
+
+.add-block-form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.title-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.add-btn {
+    background: #2ed573;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.add-btn:hover {
+    background: #25c462;
+}
+
+.add-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.keyboard-builder-container {
+    /*max-width: 900px;*/
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.keyboard-builder-container-input-group {
+    max-width: 500px;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.clear-btn {
+    background: #dc3545;
+}
+
+.clear-btn:hover {
+    background: #c82333;
+}
+
+.workspace {
+    display: flex;
+    gap: 20px;
+    min-height: 400px;
+}
+
+.palette {
+    width: 200px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.keyboard-area {
+    flex: 1;
+    background: white;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 300px;
+}
+
+.button {
+    background: #28a745;
+    color: white;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: move;
+    display: inline-block;
+    user-select: none;
+    transition: all 0.2s;
+}
+
+.button:hover {
+    background: #218838;
+    transform: translateY(-1px);
+}
+
+.row {
+    background: #e9ecef;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    min-height: 50px;
+    transition: background 0.3s;
+}
+
+.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+.drag-over {
+    background: #d4edda !important;
+    border-color: #28a745;
+}
+
+.code-output {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    border: 1px solid #dee2e6;
+    display: none;
+}
+
+.new-button-form {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+}
+
+.new-button-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.small-btn {
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+    width: 100% !important;
+}
+
+#pythonCode {
+    background: #2d3748;
+    color: #e2e8f0;
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.4;
+}
+/* контейнер блока */
+
+/* Стили для тумблеров и радио кнопок в блоках */
+.settings-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Тумблеры */
+.toggle-item {
+    margin-bottom: 20px;
+}
+
+.toggle-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 15px;
+    padding: 8px 0;
+}
+
+.toggle-input {
+    display: none;
+}
+
+.toggle-slider {
+    width: 50px;
+    height: 26px;
+    background: #ccc;
+    border-radius: 13px;
+    position: relative;
+    transition: background 0.3s;
+    flex-shrink: 0;
+}
+
+.toggle-slider:before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    top: 3px;
+    left: 3px;
+    transition: transform 0.3s;
+}
+
+.toggle-input:checked + .toggle-slider {
+    background: #007bff;
+}
+
+.toggle-input:checked + .toggle-slider:before {
+    transform: translateX(24px);
+}
+
+.toggle-text {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Радио кнопки */
+.radio-group {
+    display: flex;
+    gap: 30px;
+    margin: 20px 0;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 10px;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: background-color 0.2s;
+}
+
+.radio-label:hover {
+    background: rgba(0, 123, 255, 0.05);
+}
+
+.radio-input {
+    display: none;
+}
+
+.radio-custom {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    position: relative;
+    transition: border-color 0.3s;
+    flex-shrink: 0;
+}
+
+.radio-input:checked + .radio-custom {
+    border-color: #007bff;
+}
+
+.radio-input:checked + .radio-custom:after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #007bff;
+    border-radius: 50%;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+}
+
+.radio-text {
+    font-size: 14px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Группы настроек */
+.editor-content {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.input-group {
+    margin-left: 65px;
+    transition: all 0.3s ease;
+}
+
+/* Поля ввода */
+.text-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    background: white;
+    color: #333;
+}
+
+.text-input:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.text-area {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+    transition: border-color 0.3s;
+    background: white;
+    color: #333;
+}
+
+.text-area:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.code-area {
+    background: #f8f9fa;
+    font-size: 13px;
+}
+
+.section-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+    display: block;
+    font-size: 14px;
+}
+
+/* Специфичные стили для блоков */
+.block-item .settings-container {
+    max-width: 100%;
+    padding: 15px 0;
+}
+
+.block-item .toggle-label {
+    gap: 15px;
+}
+
+.block-item .toggle-text {
+    font-size: 14px;
+}
+
+.block-item .radio-group {
+    gap: 20px;
+}
+
+.block-item .radio-text {
+    font-size: 14px;
+}
+
+/* Скрываем стандартные checkbox и radio */
+.block-item input[type="checkbox"],
+.block-item input[type="radio"] {
+    display: none;
+}
+
+/* Показываем только наши кастомные элементы */
+.block-item .toggle-slider,
+.block-item .radio-custom {
+    display: block;
+}
+
+/* код эдитор */
+/* Стили для редактора кода Python */
+.code-editor-container {
+    position: relative;
+    margin-top: 10px;
+}
+
+.code-area {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: 'Fira Code', 'Consolas', 'Monaco', 'Courier New', monospace;
+    resize: vertical;
+    transition: border-color 0.3s;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    line-height: 1.5;
+    tab-size: 4;
+    min-height: 300px;
+    white-space: pre;
+    overflow-x: auto;
+}
+
+.code-area:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+/* Подсветка синтаксиса для Python */
+.code-area::selection {
+    background: #264f78;
+}
+
+/* Стили для темной темы редактора кода */
+.dark-theme .code-area {
+    background: #1e1e1e;
+    color: #d4d4d4;
+    border-color: #444;
+}
+
+.light-theme .code-area {
+    background: #f8f9fa;
+    color: #333;
+    border-color: #ddd;
+}
+
+/* Панель инструментов редактора кода */
+.code-toolbar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+.dark-theme .code-toolbar {
+    background: #2d2d2d;
+    border-color: #444;
+}
+
+.toolbar-btn {
+    padding: 6px 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background 0.3s;
+}
+
+.toolbar-btn:hover {
+    background: #0056b3;
+}
+
+.toolbar-btn.secondary {
+    background: #6c757d;
+}
+
+.toolbar-btn.secondary:hover {
+    background: #545b62;
+}
+
+/* Подсказки для Python кода */
+.python-hints {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #007bff;
+    font-size: 12px;
+}
+
+.dark-theme .python-hints {
+    background: #2d2d2d;
+    border-left-color: #007bff;
+}
+
+.python-hints h4 {
+    margin: 0 0 8px 0;
+    color: #007bff;
+    font-size: 13px;
+}
+
+.python-hints code {
+    background: rgba(0, 123, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    color: #e83e8c;
+}
+
+.dark-theme .python-hints code {
+    background: rgba(0, 123, 255, 0.2);
+    color: #f78fe7;
+}
+
+/* Автодополнение */
+.autocomplete-suggestions {
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.dark-theme .autocomplete-suggestions {
+    background: #2d2d2d;
+    border-color: #444;
+    color: #d4d4d4;
+}
+
+.autocomplete-suggestion {
+    padding: 8px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.dark-theme .autocomplete-suggestion {
+    border-bottom-color: #444;
+}
+
+.autocomplete-suggestion:hover,
+.autocomplete-suggestion.selected {
+    background: #007bff;
+    color: white;
+}
+
+/* Номера строк */
+.code-area {
+    background-image: linear-gradient(90deg, #f0f0f0 1px, transparent 1px);
+    background-size: 40px 100%;
+    padding-left: 50px;
+}
+
+.dark-theme .code-area {
+    background-image: linear-gradient(90deg, #2d2d2d 1px, transparent 1px);
+}
+
+/* Стили для конкретных элементов Python */
+.python-keyword { color: #569cd6; }
+.python-string { color: #ce9178; }
+.python-comment { color: #6a9955; font-style: italic; }
+.python-function { color: #dcdcaa; }
+.python-class { color: #4ec9b0; }
+.python-number { color: #b5cea8; }
+.python-operator { color: #d4d4d4; }
+
+@keyframes slideIn {
+        from {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+    }
+
+/* Стили для мини-клавиатуры */
+.mini-keyboard-builder {
+    max-width: 500px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+.mini-palette {
+    margin-bottom: 10px;
+    padding: 8px;
+    background: white;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.mini-buttons-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+}
+
+.mini-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 8px;
+    background: #28a745;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    cursor: move;
+    font-size: 12px;
+    white-space: nowrap;
+    user-select: none;
+}
+
+.mini-row.drag-over {
+    background-color: #f8f9fa;
+    border-color: #007bff;
+}
+
+.mini-keyboard-area {
+    min-height: 60px;
+    background: white;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.mini-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-bottom: 8px;
+    min-height: 30px;
+    padding: 5px;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+}
+
+.mini-row.drag-over {
+    background: #d4edda;
+    border-color: #28a745;
+}
+
+.mini-button.dragging {
+    opacity: 0.5;
+}
+
+.mini-new-button-form {
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #eee;
+}
+
+.trash-area {
+    transition: all 0.3s ease;
+}
+
+.mini-button {
+    transition: all 0.2s ease;
+}
+
+.mini-button.dragging {
+    transform: scale(0.95);
+    opacity: 0.7;
+}
+
+.mini-button.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+}
+
+.mini-row.drag-over {
+    background-color: #e3f2fd !important;
+    border-color: #2196f3 !important;
+}
+
+.trash-area.drag-over {
+    background-color: #ffebee !important;
+    border-color: #f44336 !important;
+}
+
+.beautiful-confirm .confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+}
+
+.beautiful-confirm .confirm-dialog {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.beautiful-confirm .confirm-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.beautiful-confirm .confirm-title {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+    font-size: 20px;
+}
+
+.beautiful-confirm .confirm-message {
+    margin: 0 0 20px 0;
+    color: #7f8c8d;
+    line-height: 1.5;
+}
+
+.beautiful-confirm .confirm-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.beautiful-confirm .confirm-buttons button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.beautiful-confirm .confirm-cancel {
+    background: #ecf0f1;
+    color: #7f8c8d;
+}
+
+.beautiful-confirm .confirm-cancel:hover {
+    background: #d5dbdb;
+}
+
+.beautiful-confirm .confirm-ok {
+    color: white;
+}
+
+.beautiful-confirm .confirm-ok:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutRight {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
